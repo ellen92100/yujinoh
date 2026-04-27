@@ -185,28 +185,38 @@ body{
 .summary-en{font-size:12.5px;color:var(--ink3);margin-top:12px;line-height:1.75;}
 
 /* ═══ PORTFOLIO LINK ═══ */
+@keyframes portfolio-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.55),0 0 18px 2px rgba(34,211,238,.35),0 0 36px 4px rgba(167,139,250,.18);border-color:rgba(34,211,238,.55);}
+  50%{box-shadow:0 0 0 6px rgba(34,211,238,0),0 0 32px 6px rgba(34,211,238,.55),0 0 60px 12px rgba(167,139,250,.32);border-color:rgba(34,211,238,.85);}
+}
+@keyframes portfolio-shimmer{
+  0%{left:-100%;}
+  60%{left:100%;}
+  100%{left:100%;}
+}
 .portfolio-link{
   display:inline-flex;align-items:center;gap:10px;
   padding:7px 14px 7px 16px;
-  background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(167,139,250,.08));
-  border:1px solid rgba(34,211,238,.28);
+  background:linear-gradient(135deg,rgba(34,211,238,.14),rgba(167,139,250,.12));
+  border:1px solid rgba(34,211,238,.55);
   border-radius:999px;
   text-decoration:none;
   font-size:11px;color:var(--ink);
-  transition:all .3s cubic-bezier(.2,.8,.2,1);
-  box-shadow:0 0 0 0 rgba(34,211,238,.4);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s ease;
   position:relative;overflow:hidden;
   white-space:nowrap;
+  animation:portfolio-pulse 2.6s ease-in-out infinite;
 }
 .portfolio-link::before{
   content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(34,211,238,.15),transparent);
-  transition:left .7s ease;
+  background:linear-gradient(90deg,transparent,rgba(34,211,238,.28),rgba(167,139,250,.2),transparent);
+  animation:portfolio-shimmer 3.2s ease-in-out infinite;
 }
 .portfolio-link:hover{
   border-color:var(--cyan);
-  box-shadow:0 0 24px rgba(34,211,238,.35);
+  box-shadow:0 0 32px 8px rgba(34,211,238,.55),0 0 60px 14px rgba(167,139,250,.35);
   transform:translateY(-1px);
+  animation-play-state:paused;
 }
 .portfolio-link:hover::before{left:100%;}
 .portfolio-link:hover .pl-arrow{transform:translateX(3px);color:#fff;}
@@ -364,7 +374,7 @@ body{
 .flow-step:last-child::after{display:none;}
 .flow-n{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--cyan);letter-spacing:.12em;margin-bottom:4px;font-weight:700;}
 .flow-t{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;}
-.flow-d{font-size:11px;color:var(--ink3);line-height:1.55;}
+.flow-d{font-size:11.5px;color:var(--ink2);line-height:1.55;font-weight:500;}
 
 /* ═══ THUMB GRID ═══ */
 .thumbs{display:grid;gap:10px;margin-top:14px;}
@@ -529,9 +539,9 @@ body{
       </div>
     </div>
     <div class="kpi-row" style="margin-top:24px;max-width:1080px;margin-left:auto;margin-right:auto;">
-      <div class="kpi"><div class="kpi-v" data-count="40">$40만</div><div class="kpi-l">월 평균 목표 매출</div><div class="kpi-s">26년 상반기 KPI 달성 예상</div></div>
-      <div class="kpi k2"><div class="kpi-v">911%</div><div class="kpi-l">VIP 이벤트 ROAS</div><div class="kpi-s">퍼포먼스 대비 15배</div></div>
-      <div class="kpi k3"><div class="kpi-v">14종+</div><div class="kpi-l">신규 게임 운영</div><div class="kpi-s">24~26년 전 단계 담당</div></div>
+      <div class="kpi"><div class="kpi-v">퍼포먼스 마케팅</div><div class="kpi-l">KPI 중심 운영</div><div class="kpi-s">월 목표 평균 $40만 매출 달성</div></div>
+      <div class="kpi k2"><div class="kpi-v">CRM 마케팅</div><div class="kpi-l">VIP 이벤트 ROAS</div><div class="kpi-s">911% 달성</div></div>
+      <div class="kpi k3"><div class="kpi-v">포토샵 및 쿼리</div><div class="kpi-l">다양한 툴 운영 경험</div><div class="kpi-s">디자인부터 데이터까지</div></div>
       <div class="kpi k4"><div class="kpi-v">자동화</div><div class="kpi-l">시스템 직접 구축</div><div class="kpi-s">반복 작업 → 4종 자동화</div></div>
     </div>
   </div>
@@ -645,7 +655,7 @@ body{
           <span class="chip">Meta</span><span class="chip">Unity</span><span class="chip">TikTok</span>
           <span class="chip">Applovin</span><span class="chip">Remerge</span><span class="chip">Appier</span>
           <span class="chip">Adikteev</span><span class="chip">Liftoff</span><span class="chip">RevX</span>
-          <span class="chip">CPE: Playio / Tyrads</span><span class="chip">Mistplay / Ironsource / Tapjoy</span>
+          <span class="chip">CPE: Playio / Tyrads / Mistplay / Ironsource / Tapjoy</span>
         </div>
       </div>
       <div class="comp-card c2">
@@ -682,8 +692,6 @@ body{
           <span class="chip">복귀 마케팅 (RE)</span>
           <span class="chip">CRM 마케팅 (VIP)</span>
           <span class="chip">라디오·오디오 광고</span>
-          <span class="chip">iOS SKAN 캠페인</span>
-          <span class="chip">ASA 오가닉 잠식 분석</span>
         </div>
       </div>
     </div>
@@ -698,8 +706,8 @@ body{
   <div class="brand-mark">OYJ<span>.</span>DECK</div>
   <div class="slide-inner">
     <div class="eyebrow">DoubleU Games · DUC App / Web (Canvas · Off-Canvas)</div>
-    <h1 class="title">DUC <span class="gr">마케팅 운영 전략</span></h1>
-    <p class="subtitle">코로나 이후 시장 침체기, 월 42억 광고비 UA 상황에서 <b>외부 확장이 아닌 내부 유저 효율 회수</b>로 방향을 전환. 시장 분석 → 전략 → 실행 → 결과 분석 → 재테스트 사이클을 연 단위로 운영.</p>
+    <h1 class="title">DoubleU Casino(App) <span class="gr">마케팅 운영 전략</span></h1>
+    <p class="subtitle">전반적인 업무는 현재 <b>이슈를 진단</b>하고 <b>가설을 수립</b>한 뒤, 이를 <b>검증</b>해 <b>결과를 도출</b>하는 사이클을 반복적으로 운영합니다.</p>
 
     <!-- 5-step strategy flow -->
     <div class="flow">
@@ -898,6 +906,14 @@ body{
       </div>
     </div>
 
+    <!-- Result KPI -->
+    <div class="mkpi c4" style="margin-top:14px;">
+      <div class="mk"><div class="v">+130%</div><div class="l">복귀 PUR</div><div class="s">5.59% → 14.47%</div></div>
+      <div class="mk g"><div class="v">2.3×</div><div class="l">매출 성장</div><div class="s">효율 중심 전환</div></div>
+      <div class="mk p"><div class="v">200%</div><div class="l">D28 Half ROAS</div><div class="s">고가치 재식별</div></div>
+      <div class="mk n"><div class="v">4-Axis</div><div class="l">동시 재설계</div><div class="s">매체·오디언스·소재</div></div>
+    </div>
+
     <!-- Creatives full width -->
     <div style="margin-top:14px;">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--ink3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;">TIER-SPECIFIC CREATIVES · 실제 운영 소재</div>
@@ -930,14 +946,6 @@ body{
       </div>
     </div>
 
-    <!-- Result KPI -->
-    <div class="mkpi c4" style="margin-top:14px;">
-      <div class="mk"><div class="v">+130%</div><div class="l">복귀 PUR</div><div class="s">5.59% → 14.47%</div></div>
-      <div class="mk g"><div class="v">2.3×</div><div class="l">매출 성장</div><div class="s">효율 중심 전환</div></div>
-      <div class="mk p"><div class="v">200%</div><div class="l">D28 Half ROAS</div><div class="s">고가치 재식별</div></div>
-      <div class="mk n"><div class="v">4-Axis</div><div class="l">동시 재설계</div><div class="s">매체·오디언스·소재</div></div>
-    </div>
-
   </div>
 </section>
 
@@ -949,8 +957,8 @@ body{
   <div class="brand-mark">OYJ<span>.</span>DECK</div>
   <div class="slide-inner">
     <div class="eyebrow">① 볼륨이 아닌 효율 중심 전환 · 내부 유저 회수 — VIP 실물 리워드 이벤트</div>
-    <h1 class="title"><span class="gr-pink">ROAS 911%</span> · 퍼포먼스 대비 15배 · VIP 실물 리워드 이벤트</h1>
-    <p class="subtitle">28일~6개월 이탈 VIP 대상 크리스탈 상패 300명 / 아마존 기프트카드 $10, 3,370명 발송. <b>Baseline 기반 증분 검증</b>으로 실제 매출 기여 입증.</p>
+    <h1 class="title">VIP 실물 리워드 이벤트 · <span class="gr-pink">ROAS 911%</span> · 퍼포먼스 대비 15배</h1>
+    <p class="subtitle"><b>이탈 VIP 대상 크리스탈 상패 증정 이벤트</b>와 VIP 선별 <b>아마존 기프트카드</b>를 메일·앱 Push 등 CRM 채널로 발송하는 캠페인을 진행했습니다.<br>이벤트 효율을 높이기 위해 VIP 한정으로 기획·운영했으며, 유저의 이벤트 전후 <b>ID 추적</b>을 통해 실제 매출 기여도를 측정했습니다.</p>
 
     <div class="mkpi c4">
       <div class="mk p"><div class="v">911%</div><div class="l">ROAS (Net)</div><div class="s">최종 결과 25.12</div></div>
@@ -977,8 +985,8 @@ body{
     <div class="media g5">
       <div class="media-item port">
         <div class="media-tag pink">CASE 1</div>
-        <img src="img/vip_crystal_promo.png" alt="크리스탈 상패 프로모">
-        <div class="media-lbl">크리스탈 상패 프로모</div>
+        <img src="img/vip_crystal_promo.png" alt="크리스탈 상패 프로모션">
+        <div class="media-lbl">크리스탈 상패 프로모션</div>
       </div>
       <div class="media-item port">
         <div class="media-tag">USER</div>
@@ -992,8 +1000,8 @@ body{
       </div>
       <div class="media-item port">
         <div class="media-tag gold">CASE 2</div>
-        <img src="img/vip_amazon_promo.png" alt="아마존 기프트카드 프로모">
-        <div class="media-lbl">아마존 기프트카드 프로모</div>
+        <img src="img/vip_amazon_promo.png" alt="아마존 기프트카드 프로모션">
+        <div class="media-lbl">아마존 기프트카드 프로모션</div>
       </div>
       <div class="media-item port">
         <div class="media-tag purple">EMAIL</div>
@@ -1016,8 +1024,8 @@ body{
   <div class="brand-mark">OYJ<span>.</span>DECK</div>
   <div class="slide-inner">
     <div class="eyebrow">① 볼륨이 아닌 효율 중심 전환 · 내부 유저 회수 — iOS 매출 증대 · IDFV 활용</div>
-    <h1 class="title">iOS 매출 <span class="gr-pink">+105%</span> · 결제자 <span class="gr-pink">+184%</span> — IDFV 도입 3주 성과</h1>
-    <p class="subtitle">ATT 동의 저조로 막힌 iOS RE 매체 트래킹을 <b>IDFV 기반 오디언스</b>로 우회. 도입 3주만에 매출·결제자·ROAS 모두 구조적 상승.</p>
+    <h1 class="title">iOS 매출 증대를 위한 <span class="gr-pink">IDFV</span> 도입</h1>
+    <p class="subtitle">ATT 동의율 저조로 트래킹이 제한적인 iOS 환경에서, 매출 확대를 위해 <b>IDFV 기반 오디언스 타겟팅</b>을 도입해 매체사에 유저 식별 값 정보를 추가 제공.<br>도입 <b>3주 만에 매출·결제자·ROAS가 모두 구조적으로 상승</b>하는 효과를 확인했습니다.</p>
 
     <div class="mkpi c4">
       <div class="mk"><div class="v">105%</div><div class="l">iOS 매출 상승</div><div class="s">도입 3주 후</div></div>
@@ -1078,9 +1086,6 @@ body{
       </div>
     </div>
 
-    <div class="insight" style="margin-top:24px;">
-      <div><strong>ATT 동의 시 ROAS +25% 기대치</strong> — IDFV 기반 운영 이후 Apple Search Ads·SKAN 4.0 체계와 결합해 iOS 구조적 매출 확장을 주도. 매체별 기여 분석과 오가닉 잠식 리포팅까지 직접 수행.</div>
-    </div>
   </div>
 </section>
 
@@ -1093,7 +1098,7 @@ body{
   <div class="slide-inner">
     <div class="eyebrow gold">② 프로젝트 업무 · 새로운 도전 · 새로운 발견 — 라디오 · 오디오 신규 매체</div>
     <h1 class="title"><span class="gr">Spotify + iHeartMedia</span> · 4종 오디오 소재 직접 기획·제작</h1>
-    <p class="subtitle">기존 디지털 채널 포화 상태에서 <b>라디오·오디오 광고 신규 채널을 개척</b>. 4종 소재 전략을 수립하고 Spotify 1차 검증 후 뉴욕 라디오까지 확대.</p>
+    <p class="subtitle">기존 디지털 채널 포화 상태에서 <b>라디오·오디오 광고가 새로운 전환의 기회 채널</b>로서 가능성을 확인해보고자 진행. 복귀 유저에 집중해 네 가지 전략으로 소구점을 잡고 Spotify 1차 검증 후 뉴욕 라디오로 확대.</p>
 
     <div class="h3" style="margin-top:4px;margin-bottom:10px;">4종 오디오 소재 — 직접 들어보기</div>
     <div class="audio-row">
@@ -1142,7 +1147,7 @@ body{
     </div>
 
     <div class="insight" style="margin-top:18px;">
-      <div><strong>25 Q1 · 뉴욕 라디오 집행</strong> — <b style="color:var(--cyan);">Spotify 1차 검증</b>으로 매체별 효율 비교 후 라디오 확대. 단순 매출 수치가 아닌 <b>Baseline 대비 증분</b>으로 성과를 해석하고, 오디오 특성상 즉각 전환보다 <b>브랜드 recall·복귀 PUR</b>에 가중치를 둔 측정 설계를 도입.</div>
+      <div><strong>25 Q1 · 뉴욕 라디오 집행</strong> — <b style="color:var(--cyan);">Spotify로 1차 검증한 소재</b>를 라디오 채널로 확대 송출. 단순 매출 수치가 아닌 <b>Baseline 대비 증분</b>으로 성과를 해석하였으나, 오디오 광고 특성상 <b>즉각적인 전환 효과는 제한적</b>임을 확인.</div>
     </div>
   </div>
 </section>
@@ -1158,11 +1163,10 @@ body{
     <h1 class="title">CPE 매체 효율 <span class="gr-green">구조 개선</span> · CPI 80% 절감 · Half ROI 32%</h1>
     <p class="subtitle">플레이 중심 9개 이벤트 구성, 저 비딩 단가, 구매 이벤트 지양 운영 제안으로 기존 CPE 대비 CPI를 80% 절감하고 56일간 ROI 32% 확보.</p>
 
-    <div class="proj">
+    <div class="proj" style="margin-top:14px;">
       <div class="proj-hd green">
         <div class="proj-pr">24.06 — 24.08 · 56일 운영</div>
         <div class="proj-tt">Tyrads CPE 테스트 — 제안 전략 적용 결과</div>
-        <div class="proj-ds">플레이 중심 9개 이벤트 구성 / 저 비딩 단가 / 구매 이벤트 지양 운영</div>
       </div>
       <div class="proj-bd">
         <div class="pcol">
@@ -1192,11 +1196,116 @@ body{
       </div>
     </div>
 
-    <div class="mkpi c4" style="margin-top:20px;">
+    <div class="mkpi c4" style="margin-top:14px;">
       <div class="mk"><div class="v">$2.02</div><div class="l">CPI</div><div class="s">기존 대비 80% 절감</div></div>
       <div class="mk p"><div class="v">$1.33</div><div class="l">LTV</div><div class="s">CPI 근접 수준</div></div>
       <div class="mk g"><div class="v">32%</div><div class="l">Half ROI</div><div class="s">56일 기준</div></div>
       <div class="mk n"><div class="v">15,513</div><div class="l">설치자</div><div class="s">943명 구매 전환</div></div>
+    </div>
+
+    <!-- Issue + Operational diagram -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;align-items:stretch;">
+      <!-- LEFT: RTB vs CPE finding (line chart) -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:12px 16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;">ISSUE · 매체별 수익성 비교 (CPI × ARPU)</div>
+        <div style="display:grid;grid-template-columns:1fr 92px;gap:10px;align-items:center;">
+        <svg viewBox="0 0 320 170" style="width:100%;height:auto;max-height:200px;display:block;" preserveAspectRatio="xMidYMid meet">
+          <!-- Grid lines -->
+          <line x1="30" y1="130" x2="300" y2="130" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+          <line x1="30" y1="100" x2="300" y2="100" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="2,3"/>
+          <line x1="30" y1="70" x2="300" y2="70" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="2,3"/>
+          <line x1="30" y1="40" x2="300" y2="40" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="2,3"/>
+          <line x1="30" y1="10" x2="30" y2="130" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+          <!-- Y-axis labels -->
+          <text x="24" y="133" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="end">0</text>
+          <text x="24" y="103" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="end">2</text>
+          <text x="24" y="73" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="end">4</text>
+          <text x="24" y="43" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="end">6</text>
+          <text x="24" y="13" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="end">8</text>
+          <!-- X-axis labels -->
+          <text x="30" y="143" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="middle">0</text>
+          <text x="97.5" y="143" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="middle">5</text>
+          <text x="165" y="143" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="middle">10</text>
+          <text x="232.5" y="143" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="middle">15</text>
+          <text x="300" y="143" fill="rgba(255,255,255,.45)" font-size="8" font-family="JetBrains Mono,monospace" text-anchor="middle">20</text>
+          <!-- Axis titles -->
+          <text x="10" y="72" fill="rgba(255,255,255,.55)" font-size="8" font-weight="700" font-family="JetBrains Mono,monospace" transform="rotate(-90,10,72)" text-anchor="middle">ARPU</text>
+          <text x="165" y="160" fill="rgba(255,255,255,.55)" font-size="8" font-weight="700" font-family="JetBrains Mono,monospace" text-anchor="middle">CPI</text>
+          <!-- CPE area + line (Mistplay 3,0.8 → Tapjoy 9,1.8 → Ironsource 19,2.6) -->
+          <path d="M 30,130 L 70.5,118 L 151.5,103 L 286.5,91 L 286.5,130 Z" fill="rgba(34,211,238,.1)" stroke="none"/>
+          <path d="M 30,130 L 70.5,118 L 151.5,103 L 286.5,91" fill="none" stroke="#22D3EE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+          <!-- RTB area + line (Facebook 9,5 → Google 14,7) -->
+          <path d="M 30,130 L 151.5,55 L 219,25 L 219,130 Z" fill="rgba(245,158,11,.14)" stroke="none"/>
+          <path d="M 30,130 L 151.5,55 L 219,25" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Tyrads (CPI 2.02, ARPU 0.66) — improved approach -->
+          <path d="M 30,130 L 57.27,120.1 L 57.27,130 Z" fill="rgba(52,211,153,.18)" stroke="none"/>
+          <path d="M 30,130 L 57.27,120.1" fill="none" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3,2"/>
+          <!-- CPE points -->
+          <circle cx="70.5" cy="118" r="3" fill="#22D3EE" stroke="#0F111A" stroke-width="1.5"/>
+          <circle cx="151.5" cy="103" r="3" fill="#22D3EE" stroke="#0F111A" stroke-width="1.5"/>
+          <circle cx="286.5" cy="91" r="3" fill="#22D3EE" stroke="#0F111A" stroke-width="1.5"/>
+          <!-- RTB points -->
+          <circle cx="151.5" cy="55" r="3" fill="#F59E0B" stroke="#0F111A" stroke-width="1.5"/>
+          <circle cx="219" cy="25" r="3" fill="#F59E0B" stroke="#0F111A" stroke-width="1.5"/>
+          <!-- Tyrads point -->
+          <circle cx="57.27" cy="120.1" r="3.4" fill="#34D399" stroke="#0F111A" stroke-width="1.5"/>
+          <!-- Labels -->
+          <text x="225" y="22" fill="#FBBF24" font-size="9" font-weight="700" font-family="Inter,sans-serif">Google</text>
+          <text x="158" y="51" fill="#FBBF24" font-size="9" font-weight="700" font-family="Inter,sans-serif">Facebook</text>
+          <text x="284" y="86" fill="#67E8F9" font-size="9" font-weight="700" font-family="Inter,sans-serif" text-anchor="end">Ironsource</text>
+          <text x="158" y="100" fill="#67E8F9" font-size="9" font-weight="700" font-family="Inter,sans-serif">Tapjoy</text>
+          <text x="76" y="115" fill="#67E8F9" font-size="9" font-weight="700" font-family="Inter,sans-serif">Mistplay</text>
+          <text x="52" y="128" fill="#6EE7B7" font-size="9" font-weight="700" font-family="Inter,sans-serif" text-anchor="end">Tyrads</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:9.5px;">
+          <span style="display:inline-flex;align-items:center;gap:6px;color:var(--ink2);"><span style="width:14px;height:2px;background:#F59E0B;border-radius:2px;flex-shrink:0;"></span>RTB 매체</span>
+          <span style="display:inline-flex;align-items:center;gap:6px;color:var(--ink2);"><span style="width:14px;height:2px;background:#22D3EE;border-radius:2px;flex-shrink:0;"></span>CPE 매체</span>
+          <span style="display:inline-flex;align-items:center;gap:6px;color:var(--ink2);"><span style="width:14px;height:2px;background:#34D399;border-radius:2px;flex-shrink:0;"></span>Tyrads (운영)</span>
+        </div>
+        </div>
+      </div>
+      <!-- RIGHT: Operational diagram -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:12px 16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;">OPERATION · SITEID 기반 단가 차등</div>
+        <div style="font-size:11.5px;color:var(--ink);font-weight:700;margin-bottom:8px;">SiteID 분석 → 퍼블리셔 선별 → 이벤트 단계별 단가 차등 적용</div>
+        <!-- Tier split -->
+        <div style="display:grid;grid-template-columns:1fr 14px 1fr;gap:0;align-items:stretch;margin-bottom:8px;">
+          <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3);border-radius:8px;padding:7px 10px;">
+            <div style="font-size:9px;color:var(--green);font-weight:700;letter-spacing:.1em;margin-bottom:2px;">HIGH SITEID</div>
+            <div style="font-size:10.5px;color:var(--ink);font-weight:600;">고효율 퍼블리셔</div>
+            <div style="font-size:10px;color:var(--ink2);">→ 프리미엄 단가 유지·확대</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:13px;font-weight:700;">·</div>
+          <div style="background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.3);border-radius:8px;padding:7px 10px;">
+            <div style="font-size:9px;color:var(--red);font-weight:700;letter-spacing:.1em;margin-bottom:2px;">LOW SITEID</div>
+            <div style="font-size:10.5px;color:var(--ink);font-weight:600;">저효율 퍼블리셔</div>
+            <div style="font-size:10px;color:var(--ink2);">→ 단가 절감·제외</div>
+          </div>
+        </div>
+        <!-- Event stage -->
+        <div style="font-size:9px;color:var(--ink3);font-weight:700;letter-spacing:.1em;margin-bottom:5px;">매출·이벤트 단계 고려한 단가 차등</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <div style="background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);border-radius:6px;padding:6px 8px;text-align:center;">
+            <div style="font-size:8.5px;color:var(--cyan);font-weight:700;letter-spacing:.06em;">STAGE 1</div>
+            <div style="font-size:10px;color:var(--ink);font-weight:600;">설치·초기 플레이</div>
+            <div style="font-size:9px;color:var(--ink2);">낮은 단가</div>
+          </div>
+          <div style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);border-radius:6px;padding:6px 8px;text-align:center;">
+            <div style="font-size:8.5px;color:var(--purple);font-weight:700;letter-spacing:.06em;">STAGE 2</div>
+            <div style="font-size:10px;color:var(--ink);font-weight:600;">중간 행동</div>
+            <div style="font-size:9px;color:var(--ink2);">중간 단가</div>
+          </div>
+          <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:6px;padding:6px 8px;text-align:center;">
+            <div style="font-size:8.5px;color:var(--gold);font-weight:700;letter-spacing:.06em;">STAGE 3</div>
+            <div style="font-size:10px;color:var(--ink);font-weight:600;">구매 전환</div>
+            <div style="font-size:9px;color:var(--ink2);">높은 단가 (지양)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight" style="margin-top:14px;">
+      <div>이벤트 재설계에도 <strong>CPE 매체는 RTB 매체의 매출 상승 곡선을 유지하기 어렵다</strong>고 판단. 다만 <b>내부 이벤트 재정립 등을 통한 고도화 가능성</b>은 확인.</div>
     </div>
 
   </div>
