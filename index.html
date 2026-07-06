@@ -3640,8 +3640,6 @@ if(document.readyState==='loading'){
 (function(){
   var H_OWNER = '381ac62814b4185dcf854f040b7c828ccc52f4b0fd67ccaea87ab97532a7116b';
   var H_VISITOR = '165fcea41c5efd4ca4d16280041362782c21abab39f5f1643a289b068ef6348e';
-  var DAILY_LIMIT = 2;
-  var K_COUNT = 'yj_vc';
   var K_OWNER = 'yj_ok';
   var K_SESS = 'yj_sess';
 
@@ -3649,10 +3647,6 @@ if(document.readyState==='loading'){
     var buf = new TextEncoder().encode(s);
     var h = await crypto.subtle.digest('SHA-256', buf);
     return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
-  }
-  function today(){
-    var d = new Date();
-    return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
   }
 
   async function boot(){
@@ -3670,21 +3664,7 @@ if(document.readyState==='loading'){
       if(localStorage.getItem(K_OWNER) === '1') return;
       if(sessionStorage.getItem(K_SESS) === '1') return;
 
-      var t = today();
-      var data = {d:t, n:0};
-      try {
-        var raw = localStorage.getItem(K_COUNT);
-        if(raw){
-          var p = JSON.parse(raw);
-          if(p && p.d === t) data = p;
-        }
-      } catch(e){}
-      data.n += 1;
-      localStorage.setItem(K_COUNT, JSON.stringify(data));
-
-      if(data.n >= DAILY_LIMIT){
-        showGate();
-      }
+      showGate();
     } catch(e){ /* fail-open to avoid breaking page on unsupported browsers */ }
   }
 
