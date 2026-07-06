@@ -1704,5 +1704,165 @@ body{
   // Preload background orbs
 })();
 </script>
+
+<div id="access-gate" style="display:none;position:fixed;inset:0;background:rgba(250,250,250,0.98);z-index:99999;overflow-y:auto;padding:40px 20px;font-family:'Noto Sans KR','Inter',sans-serif;">
+  <div style="max-width:520px;margin:40px auto;background:#fff;border:1px solid #E8E8E8;border-radius:12px;padding:40px 36px;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+    <div style="text-align:center;margin-bottom:24px;">
+      <img id="gate-photo" src="" alt="오유진" style="width:140px;height:180px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid #E8E8E8;">
+    </div>
+    <div style="text-align:center;margin-bottom:8px;">
+      <div style="font-size:22px;font-weight:700;color:#111;">오유진 <span style="font-size:14px;font-weight:500;color:#666;">Oh Yu Jin</span></div>
+      <div style="font-size:12px;color:#666;margin-top:6px;">퍼포먼스 마케터 · 데이터 자동화 · 게임 &amp; 패션 마케팅</div>
+    </div>
+    <div style="border-top:1px solid #EEE;margin:22px 0 0;padding-top:20px;font-size:13px;color:#333;line-height:2;">
+      <div><strong style="color:#111;display:inline-block;width:72px;">총 경력</strong> 9년 4개월</div>
+      <div><strong style="color:#111;display:inline-block;width:72px;">Tel.</strong> 010-5113-3628</div>
+      <div><strong style="color:#111;display:inline-block;width:72px;">Mail.</strong> ellen1131@naver.com</div>
+    </div>
+    <div style="background:#FAFAFA;border-left:2px solid #111;padding:14px 16px;font-size:12px;line-height:1.85;color:#333;margin:18px 0 0;border-radius:0 6px 6px 0;">
+      퍼포먼스 마케팅 채널을 직접 설계·운영하며 데이터를 분석하고, 반복 업무를 자동화로 전환해 효율과 인사이트를 동시에 높여온 마케터입니다. 게임 / 패션 도메인 9년 4개월의 경험으로 매체 선정부터 오디언스 설계, KPI 달성까지 end-to-end 마케팅 역량을 보유하고 있습니다.
+    </div>
+    <div style="border-top:1px solid #EEE;padding-top:22px;margin-top:26px;">
+      <div style="font-size:12px;color:#666;line-height:1.85;margin-bottom:14px;">
+        잦은 접속이 감지되어 페이지 보안을 위해 본 창이 표시되었습니다.<br>
+        내용 확인이 어려우시다면 <strong style="color:#111;">비밀번호</strong>를 입력해 주시거나,<br>
+        위 연락 가능한 채널로 문의 부탁드립니다.
+      </div>
+      <form id="gate-form" style="display:flex;gap:8px;">
+        <input type="password" id="gate-pw" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="비밀번호" style="flex:1;padding:11px 13px;border:1px solid #DDD;border-radius:6px;font-size:14px;outline:none;background:#fff;">
+        <button type="submit" style="padding:11px 22px;background:#111;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:600;">확인</button>
+      </form>
+      <div id="gate-err" style="display:none;font-size:11px;color:#C92A2A;margin-top:10px;">비밀번호가 올바르지 않습니다.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var H_OWNER = '381ac62814b4185dcf854f040b7c828ccc52f4b0fd67ccaea87ab97532a7116b';
+  var H_VISITOR = '165fcea41c5efd4ca4d16280041362782c21abab39f5f1643a289b068ef6348e';
+  var K_OWNER = 'yj_ok';
+  var K_SESS = 'yj_sess';
+
+  async function sha256(s){
+    var buf = new TextEncoder().encode(s);
+    var h = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+  }
+
+  async function boot(){
+    try {
+      var params = new URLSearchParams(location.search);
+      var ownerIn = params.get('owner');
+      if(ownerIn){
+        if(await sha256(ownerIn) === H_OWNER){
+          localStorage.setItem(K_OWNER, '1');
+          params.delete('owner');
+          var qs = params.toString();
+          history.replaceState({}, '', location.pathname + (qs ? '?'+qs : '') + location.hash);
+        }
+      }
+      if(localStorage.getItem(K_OWNER) === '1') return;
+      if(sessionStorage.getItem(K_SESS) === '1') return;
+
+      showGate();
+    } catch(e){ /* fail-open to avoid breaking page on unsupported browsers */ }
+  }
+
+  function showGate(){
+    var gate = document.getElementById('access-gate');
+    if(!gate) return;
+    var heroImg = document.querySelector('.photo-wrap img') || document.querySelector('.avatar img');
+    if(heroImg){
+      var g = document.getElementById('gate-photo');
+      g.src = heroImg.src;
+    }
+    gate.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('gate-form').addEventListener('submit', async function(e){
+      e.preventDefault();
+      var v = document.getElementById('gate-pw').value.trim();
+      var h = await sha256(v);
+      if(h === H_VISITOR || h === H_OWNER){
+        if(h === H_OWNER) localStorage.setItem(K_OWNER, '1');
+        sessionStorage.setItem(K_SESS, '1');
+        gate.style.display = 'none';
+        document.body.style.overflow = '';
+      } else {
+        document.getElementById('gate-err').style.display = 'block';
+        document.getElementById('gate-pw').value = '';
+      }
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+
+// ── Visitor Alert (Web3Forms) ──
+(function(){
+  var W3F_KEY = '7d5ef6ae-4ab5-4d9a-8e3a-b8b653cc56f7';
+  var ALERT_KEY = 'yj_last_alert';
+
+  async function sendAlert(){
+    try {
+      if(localStorage.getItem('yj_ok') === '1') return;
+
+      var today = new Date().toISOString().slice(0,10);
+      var last = null;
+      try { last = JSON.parse(localStorage.getItem(ALERT_KEY) || 'null'); } catch(e){}
+
+      var info = {};
+      try {
+        var r = await fetch('https://ipapi.co/json/');
+        if(r.ok) info = await r.json();
+      } catch(e){}
+      var ip = info.ip || '(unknown)';
+
+      // Skip if same IP already reported today from this browser
+      if(last && last.d === today && last.ip === ip) return;
+
+      var loc = [info.city, info.region, info.country_name].filter(Boolean).join(', ') || '-';
+      var msg = [
+        '포트폴리오 방문 알림',
+        '',
+        'IP: ' + ip,
+        '위치: ' + loc,
+        'ISP: ' + (info.org || '-'),
+        '시간: ' + new Date().toLocaleString('ko-KR'),
+        'Referrer: ' + (document.referrer || '직접 방문'),
+        'URL: ' + location.href,
+        '디바이스: ' + (navigator.userAgent || '-'),
+        '언어: ' + (navigator.language || '-'),
+        '화면: ' + screen.width + 'x' + screen.height
+      ].join('\n');
+
+      var subj = '[yujinoh] 방문 - ' + (info.city || info.country_name || ip);
+
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: W3F_KEY,
+          subject: subj,
+          from_name: 'yujinoh portfolio',
+          message: msg
+        })
+      });
+
+      localStorage.setItem(ALERT_KEY, JSON.stringify({d: today, ip: ip}));
+    } catch(e){ /* silent */ }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', sendAlert);
+  } else {
+    sendAlert();
+  }
+})();
+</script>
 </body>
 </html>
